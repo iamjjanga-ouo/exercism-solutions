@@ -1,0 +1,5 @@
+# Ignore .exercism folder which contain sensitive data
+*/*/.exercism
+
+#python
+python/*/.pytest_cache
