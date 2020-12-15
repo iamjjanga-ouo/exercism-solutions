@@ -3,3 +3,5 @@
 
 #python
 python/*/.pytest_cache
+python/*/.idea
+python/*/__pycache__
