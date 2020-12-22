@@ -1,16 +1,25 @@
 class Clock:
     def __init__(self, hour, minute):
-        over = int(-1 if -60 <= minute < 0 else minute // 60)  # initial 'over' variable is better than nested if condition one-line
-        self.hour = ((hour if hour >= 0 else 24 - (abs(hour) % 24)) + over) % 24
-        self.minute = (minute % 60) if (minute % 60) >= 0else 60 - (abs(minute) % 60)
+        # over = int(-1 if -60 <= minute < 0 else minute // 60)  # initial 'over' variable is better than nested if condition one-line
+        # self.hour = ((hour if hour >= 0 else 24 - (abs(hour) % 24)) + over) % 24
+        # self.minute = (minute % 60) if (minute % 60) >= 0else 60 - (abs(minute) % 60)
+
+        ## More advance solution (Community)
+        self.hour = (hour + (minute // 60)) % 24
+        self.minute = minute % 60
 
     def __repr__(self):
-        hour = str(self.hour) if self.hour >= 10 else "0" + str(self.hour)
-        minute = str(self.minute) if self.minute >= 10 else "0" + str(self.minute)
-        return hour + ":" + minute
+        # hour = str(self.hour) if self.hour >= 10 else "0" + str(self.hour)
+        # minute = str(self.minute) if self.minute >= 10 else "0" + str(self.minute)
+        # return hour + ":" + minute
+
+        # using zfill
+        return '{}:{}'.format(str(self.hour).zfill(2), str(self.minute).zfill(2))
 
     def __eq__(self, other):
-        return self.__repr__() == other.__repr__()
+        # return self.__repr__() == other.__repr__()
+        # this is better
+        return (self.hour, self.minute) == (other.hour, other.minute)
 
     def __add__(self, minutes):
         # this can be make another object
