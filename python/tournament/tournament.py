@@ -6,6 +6,7 @@ def check_table_has_team(db, teams):
 
 
 def cal_score(db, team1, team2, result):
+    # Match played
     db[team1][0] += 1
     db[team2][0] += 1
     if result == 'win':
@@ -17,14 +18,14 @@ def cal_score(db, team1, team2, result):
     else:
         db[team1][3] += 1
         db[team2][1] += 1
-
+    # Point
     db[team1][4] = db[team1][1] * 3 + db[team1][2]
     db[team2][4] = db[team2][1] * 3 + db[team2][2]
 
 
 def sort_by_score(db):
-    alpha_sort_dict = sorted(db.items())
-    return sorted(alpha_sort_dict, key=(lambda x : x[1][4]), reverse=True)
+    alpha_sort_dict = sorted(db.items())  # sorted by alphabetic
+    return sorted(alpha_sort_dict, key=(lambda x : x[1][4]), reverse=True)  # sorted by Point
 
 
 def tally(rows):
@@ -33,12 +34,12 @@ def tally(rows):
         team1, team2, result = row.split(";")
         # Check db has team already
         check_table_has_team(db, [team1, team2])
-
+        # Calcurate the match result
         cal_score(db, team1, team2, result)
 
-    table = sort_by_score(db) # return list
+    table = sort_by_score(db)  # return list type
 
-    res = ["Team                           | MP |  W |  D |  L |  P",]
+    res = ["Team                           | MP |  W |  D |  L |  P"]
     for row in table:
         res.append(f'{row[0]}'.ljust(31) + f'|  {row[1][0]} |  {row[1][1]} |  {row[1][2]} |  {row[1][3]} |  {row[1][4]}')
 
