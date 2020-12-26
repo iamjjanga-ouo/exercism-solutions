@@ -11,7 +11,7 @@ def check_header(line):
     return line
 
 
-def check_list(line, in_list):
+def check_list(line, in_list, in_list_append):
     m = re.match(r'\* (.*)', line)  # this code maybe check only unordered list
     if m: # List
         if not in_list: # List start
@@ -37,7 +37,7 @@ def check_list(line, in_list):
             in_list_append = True
             in_list = False
 
-    return line
+    return line, in_list, in_list_append
 
 def check_bold(curr):
     rep = '(.*)[_*]{2}(.*)[_*]{2}(.*)'
@@ -68,7 +68,7 @@ def parse(markdown):
         ## is Header?
         line = check_header(line)
         ## is Lists?
-        line = check_list(line)
+        line, in_list, in_list_append = check_list(line, in_list, in_list_append)
 
         m = re.match('<h|<ul|<p|<li', line)
         ## just text
