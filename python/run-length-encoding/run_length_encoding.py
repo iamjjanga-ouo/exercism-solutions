@@ -1,9 +1,23 @@
 def decode(string):
+    num = 0
+    de_str = ""
 
     # Check String is empty
     if not string:
         return string
+    # Check each Character in string
+    for c in string:
+        if c.isdigit(): # If character is digit, count number
+            num *= 10
+            num += int(c)
+        else:               # If character is letter, append character * count in de_str
+            if num == 0:
+                de_str += c
+            else:
+                de_str += c * num
+            num = 0
 
+    return de_str
 
 def encode(string):
     en_str = ""
