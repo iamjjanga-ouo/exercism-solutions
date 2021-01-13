@@ -5,3 +5,8 @@
 python/*/.pytest_cache
 python/*/.idea
 python/*/__pycache__
+
+#bash
+bash/*/.pytest_cache
+bash/*/.idea
+bash/*/__pycache__
